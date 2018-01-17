@@ -97,15 +97,19 @@ class Player {
   this.health = health;
   this.strength = strength;
   this.speed = speed;
-  this.packValue = function(){let pack = [];};
-  this.maxHealthValue = function(){let maxHealth = health;};
+  this._packValue = function(){let pack = [];};
+  this._maxHealthValue = function(){let maxHealth = health;};
   this.isAlive = true;
-  this.equipped = false;
-this.getPack = function(){return this.packValue();}
-this.getMaxHealth = function(){return this.getMaxHealth();}
-  }
+  this.equipped = false; 
+}
+ get getPack() {
+     return this._packValue;
+   }
+ get getMaxHealth() {
+   return this._maxHealthValue;
+ }
   };
- 
+
 
 
 
@@ -120,7 +124,8 @@ this.getMaxHealth = function(){return this.getMaxHealth();}
  *
  * @name checkPack
  */
-
+checkPack()
+let contents = [];
 
 /**
  * Player Class Method => takeItem(item)
