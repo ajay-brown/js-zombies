@@ -97,22 +97,13 @@ class Player {
   this.health = health;
   this.strength = strength;
   this.speed = speed;
-  this._packValue = function(){let pack = [];};
-  this._maxHealthValue = function(){let maxHealth = health;};
+  this._pack = [];
+  this._maxHealth = health; 
   this.isAlive = true;
-  this.equipped = false; 
+  this.equipped = false;
+  this.getPack = function() { return this._pack;}
+  this.getMaxHealth = function() { return this._maxHealth; }
 }
- get getPack() {
-     return this._packValue;
-   }
- get getMaxHealth() {
-   return this._maxHealthValue;
- }
-  };
-
-
-
-
 /**
  * Player Class Method => checkPack()
  * -----------------------------
@@ -124,9 +115,13 @@ class Player {
  *
  * @name checkPack
  */
-checkPack()
-let contents = [];
-
+checkPack() {
+  let contents = [];
+  contents.push(this.getPack())
+  for (let i=0;i<contents.length;i++) {
+  console.log(contents);
+    }
+  }
 /**
  * Player Class Method => takeItem(item)
  * -----------------------------
@@ -144,8 +139,16 @@ let contents = [];
  * @param {Item/Weapon/Food} item   The item to take.
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
-
-
+  takeItem(item) {
+    if (this.getPack().length >= 3) {
+      console.log(this.name + "'s pack is full");
+      return false;
+    } else {
+      this.getPack().push(item);
+      console.log(this.checkPack())
+      return true;
+    }
+  }
 /**
  * Player Class Method => discardItem(item)
  * -----------------------------
@@ -171,6 +174,33 @@ let contents = [];
  * @param {Item/Weapon/Food} item   The item to discard.
  * @return {boolean} true/false     Whether player was able to remove item from pack.
  */
+discardItem(item) {
+  if (this.getPack().indexOf(item)) {
+  let itemIndex = this.getPack().findIndex(item);
+  this.getPack().splice(itemIndex,1);
+  console.log(this.name+ "'s " + item + " was discarded" );
+  return true
+  } else {
+   console.log("Nothing was discarded "+ item +" was not found");
+   return false;
+  }
+}
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
